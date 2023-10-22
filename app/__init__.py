@@ -2,6 +2,8 @@
 from flask import Flask
 from app.config import  project_config as App_Config
 from app.models import db
+# from app.students.views import  sayhello
+from app.students import  student_blueprint
 
 def create_app(config_name='dev'):
     app = Flask(__name__)
@@ -9,4 +11,9 @@ def create_app(config_name='dev'):
     app.config["SQLALCHEMY_DATABASE_URI"]= Current_App_Config.SQLALCHEMY_DATABASE_URI
     app.config.from_object(Current_App_Config)
     db.init_app(app)
+
+
+    #####
+    # app.add_url_rule('/hello', view_func=sayhello)
+    app.register_blueprint(student_blueprint)
     return app
